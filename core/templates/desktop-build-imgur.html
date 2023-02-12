@@ -1,0 +1,95 @@
+<!-- desktop-build.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+       <meta name="referrer" content="no-referrer">
+    <title>Desktop Deck Builder</title>
+    <link rel="stylesheet" href="/static/styleDesktop.css">
+    <script type="text/javascript" src="/static/deck_build.js"></script>
+    <script type="text/javascript" >
+    function start(){
+    deck= new Deck();
+    console.log("deck created");
+    console.log(deck.deck);
+    }
+        window.onload = start;
+
+    </script>
+  </head>
+
+  <body>
+
+<div class="wrapper">
+    <div class="one">
+        <h1>Desktop Deck Builder</h1>
+       <!-- <input type="button" value="Log cards" onclick="console.log(deck.deck);" />-->
+
+
+        <input type="button" value="Play" onclick="play();" />
+        <input type="button" value="Clear" onclick="deck.clear();updateDeckView(deck);" />
+        Custom Link to Imgur Album:
+        <input type="text" id="albumLink" name="albumLink" minlength="10" maxlength="240" size="10"/>
+        <input type="button" value="Load" onclick="loadimgur()" />
+        <input type="button" value="Share This Card Collection" onclick="getLink();" />
+        <h2>Deck:</h2>
+        <div id="deck" class="deck"></div>
+
+    </div>
+
+
+  <div class="two">
+
+      <div class="card_selection">
+
+
+            {% for image in images %}
+            <div class="card" >
+
+                <input type="image" id="{{ image }}" src="{{ image }}" name="saveForm" class="card" onclick="deck.addCard(this.id);updateDeckView(deck)">
+
+
+            </div>
+             {% endfor %}
+
+    </div>
+</div>
+
+</div>
+
+  <script>
+
+
+function play()
+{
+var deckString = "";
+for (let line in deck.deck)
+{
+console.log(line);
+deckString += deck.deck[line] + ",";
+console.log(deck.deck[line]);
+}
+console.log(deckString);
+window.location.href = "/desktop-play?deck=" + deckString;
+}
+
+function loadimgur()
+{
+
+var albumLink = document.getElementById("albumLink").value;
+//albumLink=albumLink.replace("*/a/","");
+albumLink=albumLink.slice(-7);
+console.log(albumLink);
+window.location.href = "/desktop-build-imgur?albumID=" + albumLink;
+
+}
+function getLink()
+{
+
+navigator.clipboard.writeText(document.location.href);
+}
+
+
+  </script>
+  </body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <meta name="referrer" content="no-referrer">
+    <title>Cards</title>
+    <link rel="stylesheet" href="/static/styleDesktop.css">
+    <script type="text/javascript" src="/static/deck_build.js"></script>
+    <script type="text/javascript">
+
+    function start(){
+    var deckToLoad = {{ deck | safe }};
+    deckToLoad.pop();
+    var activeDeck =new Deck();
+    console.log(deckToLoad);
+    for (let line in deckToLoad){
+        activeDeck.addCard(deckToLoad[line]);
+    }
+    console.log("deck created");
+
+console.log(activeDeck.deck);
+    drawPile=new Deck();
+    discardPile=new Deck();
+    trashPile=new Deck();
+    playPile=new Deck();
+    handPile=new Deck();
+    drawPile.deck=activeDeck.deck;
+    updateUi();
+    }
+        window.onload = start;
+
+    </script>
+</head>
+<body>
+
+<div id="mySidenav" class="sidenav">
+  <a id="share" onclick="longLink()">Share deck</a>
+    <a href="/" id="load">New Deck</a>
+</div>
+
+
+<div class="wrapper">
+    <div class ="drawPile" ondrop="drop(event)"  ondragover="dragOver(event)">
+        <button onclick="drawPile.deal()" id ="drawButton" pile="draw">DecK</button>
+        </div>
+    <div class ="interface">
+        <div class="wrapper">
+        <input type="image" src="/static/images/draw.png" value="Draw" onclick="if (drawPile.deck.length > 0) { handPile.addCard(drawPile.deal());updateUi();console.log(handPile.deck)}" />
+        <input type="image" src="/static/images/shuffle.png" value="shuffle" onclick="drawPile.shuffle();" />
+        <input type="image" src="/static/images/reset.png" value="Reset" onclick="drawPile.reset(); handPile.clear(); trashPile.clear();playPile.clear();discardPile.clear();start();" />
+
+        <input type="image" src="/static/images/trash.png" ondrop="drop(event)"  ondragover="dragOver(event)" pile="trash">
+
+        <input type="image" src="/static/images/discard.png" ondrop="drop(event)"  ondragover="dragOver(event)" pile="discard">
+    </div>
+          </div>
+    <div class ="playArea" id="playArea" ondrop="drop(event)" ondragover="dragOver(event)" pile="play">
+
+
+
+        </div>
+
+    <div class ="handArea" id="handArea" ondrop="drop(event)"  ondragover="dragOver(event)">
+
+    <div class="cardPlay" id="cardPlay" draggable="true" ondragstart="dragStart(event)">
+     <img id="static/cards/1.jpg" src="static/cards/1.jpg" name="saveForm" class="card" pile="play" >
+
+
+
+
+    </div>
+
+        </div>
+</div>
+
+
+</body>
+
+<script>
+function updateUi(){
+    document.getElementById("drawButton").innerHTML = "Draw Card("+drawPile.deck.length+")";
+//document.getElementById("discardButton").innerHTML = "Discard("+discardPile.deck.length+")";
+//document.getElementById("trashButton").innerHTML = "Trash("+trashPile.deck.length+")";
+document.getElementById("playArea").innerHTML = "";
+document.getElementById("cardPlay").innerHTML = "";
+for (let card in playPile.deck){
+    document.getElementById("playArea").innerHTML += '<img id="'+card+'" src='+playPile.deck[card]+' name="saveForm" class="card" pile="play" >';
+}
+
+for (let card of handPile.deck){
+
+    document.getElementById("cardPlay").innerHTML += '<img id="'+card+'" src='+card+' name="saveForm" class="card" pile="hand" >';
+}
+
+}
+// Drag start event
+  function dragStart(event) {
+    var data = {
+      id: event.target.id,
+      pile: event.target.getAttribute("pile")
+    };
+    // Set the data to be transferred
+    event.dataTransfer.setData("text/plain", JSON.stringify(data));
+    // Add the "move" cursor
+    event.dataTransfer.effectAllowed = "move";
+  }
+
+
+  // Drag over event
+  function dragOver(event) {
+    // Prevent default behavior (prevent file from being opened)
+    event.preventDefault();
+
+    // Set the dropEffect to move
+    event.dataTransfer.dropEffect = "move"
+  }
+
+  // Drop event
+  function drop(event) {
+    // Prevent default behavior (prevent file from being opened)
+    event.preventDefault();
+
+    var data = JSON.parse(event.dataTransfer.getData("text/plain"));
+
+
+    var newPile= event.target.getAttribute("pile");
+    console.log(newPile);
+    if (newPile=="play"){
+        playPile.addCard(data.id);
+    }
+    else if (newPile=="discard"){
+        discardPile.addCard(data.id);
+    }
+    else if (newPile=="trash"){
+        trashPile.addCard(data.id);
+    }
+    else if (newPile=="draw"){
+        drawPile.addCard(data.id);
+    }
+
+    //update piles accordingly
+    if (data.pile=="draw"){
+    drawPile.removeCard(data.id);
+    }
+    if (data.pile=="discard"){
+    discardPile.removeCard(data.id);
+    }
+    if (data.pile=="trash"){
+    trashPile.removeCard(data.id);
+    }
+    if (data.pile=="play"){
+    handPile.removeCard(data.id);
+    console.log(data.id);
+    }
+    if (data.pile=="hand"){
+    handPile.removeCard(data.id);
+    console.log(data.id);
+    }
+
+    updateUi();
+
+}
+function longLink(){
+URL = document.location.href;
+window.location.href = "/longString?long=" + URL;
+}
+
+</script>
+</html>

@@ -1,0 +1,18 @@
+<!-- index.html -->
+<html>
+  <head>
+    <title>Card Game</title>
+  </head>
+  <body>
+    <script>
+      // Check if the user is on a mobile device
+      if (/Mobi/.test(navigator.userAgent)) {
+        // Redirect to the mobile building page
+        window.location = "/mobile-build";
+      } else {
+        // Redirect to the desktop building page
+        window.location = "/desktop-build-imgur";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,208 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.one {
+  grid-column: 1;
+  grid-row: 1/4;
+  border-style: solid;
+    border-color:#222831;
+}
+.drawPile {
+  grid-column: 1;
+  grid-row: 1;
+  border-style: solid;
+  border-color:#222831;
+  background-color: #222831;
+  height: 30vh;
+  z-index: 1000;
+}
+
+.discardPile {
+}
+
+.interface {
+  grid-column: 2;
+  grid-row: 1;
+  border-style: solid;
+  border-color:#222831;
+  background-color: #222831;
+  height: 30vh;
+
+  z-index: 1000;
+
+}
+
+
+.trashPile {
+
+}
+
+.handArea {
+  grid-column: 1/4;
+  grid-row: 3/4;
+  border-style: solid;
+  border-color:#222831;
+  background-color: #222831;
+  height: 35vh;
+  z-index: 1000;
+  overflow: auto;
+}
+
+.playArea {
+  grid-column: 3/4;
+  grid-row: 1/2;
+  border-style: solid;
+  border-color:#222831;
+  background-color: #222831;
+  height: 50vh;
+  z-index: 1000;
+  overflow: auto;
+}
+
+.two {
+  grid-column: 2 / 4;
+  grid-row: 1 / 4;
+  height: 90vh;
+  border-style: solid;
+  border-color:#222831;
+
+}
+
+
+
+.card{
+max-width:30vw;
+max-height:30vh;
+}
+
+.playArea .card{
+max-width:15vh;
+}
+
+.cardPlay{
+
+}
+
+.card:hover {
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+.card_selection {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+
+    overflow: auto;
+    max-height:90vh;
+
+}
+.deck {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1px;
+    overflow-y: auto;
+    max-height:70vh;
+    min-height:30vh;
+    z-index: 30;
+}
+.deck .img {
+    max-width: 100%;
+    max-height: 100%;
+}
+.drawPile button{
+    width: 10vw;
+    height: 30vh;
+}
+
+.discardPile button{
+    width: 10vw;
+    height: 30vh;
+}
+
+.trashPile button{
+    width: 10vw;
+    height: 30vh;
+}
+.deck .img:hover {
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 0.5s ease;
+    transform: scale(2);
+    z-index: 1000;
+}
+ .custom-file-upload {
+    display: inline-block;
+    padding: 1px 12px;
+    cursor: pointer;
+    border: 2px solid #000;
+    border-radius: 4px;
+    background: #00ADB5;
+  }
+
+
+input[type="file"] {
+    display: none;
+  }
+
+body {
+background-color: #393E46;
+max-width: 100%;
+    overflow-x: hidden;
+}
+
+input  {
+background-color: #00ADB5;
+max-height: 15vh;
+}
+
+input:hover {
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 0.5s ease;
+    transform: scale(1.1);
+    z-index: 1000;
+}
+
+
+#mySidenav a {
+  position: absolute; /* Position them relative to the browser window */
+  right: -80px; /* Position them outside of the screen */
+  transition: 0.3s; /* Add transition on hover */
+  padding: 15px; /* 15px padding */
+  width: 100px; /* Set a specific width */
+  text-decoration: none; /* Remove underline */
+  font-size: 20px; /* Increase font size */
+  color: white; /* White text color */
+  border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+  z-index: 100000;
+}
+
+#mySidenav a:hover {
+  right: 0; /* On mouse-over, make the elements appear as they should */
+}
+
+/* The about link: 20px from the top with a green background */
+#share {
+    cursor: pointer;
+  top: 10px;
+  background-color: #04AA6D;
+}
+#load {
+  top: 70px;
+  background-color: #04AA6D;
+}

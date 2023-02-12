@@ -1,0 +1,77 @@
+<!-- desktop-build.html -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mobile Deck Builder</title>
+    <link rel="stylesheet" href="/static/styleMobile.css">
+    <script type="text/javascript" src="/static/deck_build.js"></script>
+     <script type="text/javascript" >
+    function start(){
+    deck= new Deck();
+    console.log("deck created");
+    }
+        window.onload = start;
+
+    </script>
+  </head>
+
+
+
+
+  <body>
+
+
+
+
+<div class="wrapper">
+    <div class="one">
+        <h1>Desktop Deck Builder</h1>
+       <!-- <input type="button" value="Log cards" onclick="console.log(deck.deck);" />-->
+        <input type="button" value="save" onclick="saveFile();" />
+
+        <label for="file-upload" class="custom-file-upload">
+        load
+        </label>
+        <input id="file-upload" type="file" onchange="loadFile(event)">
+
+        <input type="button" value="play" onclick="deck.addCard(this.id);" />
+        <input type="button" value="Clear" onclick="deck.clear();updateDeckView(deck);" />
+
+
+        <h2>Deck:</h2>
+        <div id="deck" class="deck"></div>
+
+    </div>
+
+
+  <div class="two">
+
+      <div class="card_selection">
+
+     {% for file in images %}
+            <!-- {% for image in file %}-->
+            <div class="card" >
+                <!--<input type="checkbox" name="card" value="{{ image }}">-->
+
+
+                <input type="image" id="{{ url_for('static', filename='cards/' + image+'.jpg') }}" src="{{ url_for('static', filename='cards/' + image+'.jpg') }}" name="saveForm" class="card" onclick="deck.addCard(this.id);updateDeckView(deck)">
+
+
+            </div>
+             <!--{% endfor %}-->
+          {% endfor %}
+
+
+
+    </div>
+</div>
+
+</div>
+
+  <script>
+
+
+  </script>
+  </body>
+</html>
