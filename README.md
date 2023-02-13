@@ -2,9 +2,9 @@
  This is a basic card playground 
  
  Features: 
- Load cards from a local folder OR better yet load them from a Imgur album so <s>I can save money on hosting </s> you can load any deck or card collection. 
- Share decks and card collection
- There is a URL shortener as part of the sharing but if you never made one you could steal that code from this project. 
+  - Load cards from a local folder OR better yet load them from a Imgur album so <s>I can save money on hosting </s> you can load any deck or card collection. 
+  - Share decks and card collection
+  - There is a URL shortener as part of the sharing but if you never made one you could steal that code from this project. 
 
 To see a live demo on a desktop visit cards.benknutson.net:8080
 
